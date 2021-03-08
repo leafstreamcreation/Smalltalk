@@ -1,10 +1,26 @@
 window.addEventListener("load", () => {
-  const topicField = document.getElementById("topic-text");
-  const newTopicButton = document.getElementById("new-topic-button");
+  const subjectField = document.getElementById("subject-text");
+  const icebreakerField = document.getElementById("icebreaker-text");
+  const newSubjectButton = document.getElementById("new-subject-button");
+  const newIcebreakerButton = document.getElementById("new-icebreaker-button");
 
   const topicGenerator = new RandomSubjectGenerator(...DATA);
 
-  newTopicButton.addEventListener("click", () => {
-    topicField.innerHTML = topicGenerator.randomSubject();
+  newSubject();
+
+  newSubjectButton.addEventListener("click", () => {
+    newSubject();
   });
+
+  newIcebreakerButton.addEventListener("click", () => {
+    icebreakerField.innerHTML = topicGenerator.randomIcebreaker(
+      subjectField.innerHTML
+    );
+  });
+
+  function newSubject() {
+    const subject = topicGenerator.randomSubject();
+    subjectField.innerHTML = subject;
+    icebreakerField.innerHTML = topicGenerator.randomIcebreaker(subject);
+  }
 });
